@@ -1,0 +1,14 @@
+.app {
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.main-content {
+  min-height: calc(100vh - 80px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

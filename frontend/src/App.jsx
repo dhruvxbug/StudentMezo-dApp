@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import './App.css';
 import HomePage from './pages/HomePage';
 import StudentDashboard from './pages/StudentDashboard';
@@ -8,9 +7,9 @@ import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="app">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <main className="main-content">
+      <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/student" element={<StudentDashboard />} />

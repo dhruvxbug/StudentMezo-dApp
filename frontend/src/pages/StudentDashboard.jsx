@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useAccount, useReadContract, useWriteContract } from 'wagmi';
 import { parseEther, formatEther } from 'viem';
 import { CONTRACT_ADDRESSES, PLATFORM_ABI, MUSD_ABI, NFT_ABI } from '../utils/contracts';
-import './StudentDashboard.css';
 
 function StudentDashboard() {
   const { address, isConnected } = useAccount();
@@ -85,170 +84,191 @@ function StudentDashboard() {
 
   if (!isConnected) {
     return (
-      <div className="dashboard-container">
-        <div className="connect-prompt">
-          <h2>Connect Your Wallet</h2>
-          <p>Please connect your wallet to access the student dashboard.</p>
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center max-w-md">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Connect Your Wallet</h2>
+          <p className="text-gray-600">Please connect your wallet to access the student dashboard.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="dashboard-container">
-      <h1 className="dashboard-title">Student Dashboard</h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">Student Dashboard</h1>
 
-      {/* Student Status */}
-      <div className="dashboard-section">
-        <h2>Your Status</h2>
-        <div className="stats-cards">
-          <div className="stat-card">
-            <div className="stat-label">Verification Status</div>
-            <div className="stat-value">
-              {studentData?.[0] ? '✅ Verified' : '❌ Not Verified'}
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-label">MUSD Balance</div>
-            <div className="stat-value">
-              {musdBalance ? formatEther(musdBalance) : '0'} MUSD
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-label">Reputation Score</div>
-            <div className="stat-value">
-              {studentData?.[3]?.toString() || '0'} / 200
-            </div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-label">Total Borrowed</div>
-            <div className="stat-value">
-              {studentData?.[1] ? formatEther(studentData[1]) : '0'} MUSD
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Collateral Deposit */}
-      <div className="dashboard-section">
-        <h2>Deposit Collateral & Mint MUSD</h2>
-        <div className="form-card">
-          <p className="form-description">
-            Deposit ETH as collateral (simulating Bitcoin via Mezo) to mint MUSD stablecoins.
-          </p>
-          <div className="form-group">
-            <label>Collateral Amount (ETH)</label>
-            <input
-              type="number"
-              step="0.01"
-              value={collateralAmount}
-              onChange={(e) => setCollateralAmount(e.target.value)}
-              placeholder="0.1"
-            />
-          </div>
-          <button
-            className="btn btn-primary"
-            onClick={handleDepositCollateral}
-            disabled={!collateralAmount || parseFloat(collateralAmount) <= 0}
-          >
-            Deposit Collateral & Mint MUSD
-          </button>
-        </div>
-      </div>
-
-      {/* Loan Request */}
-      <div className="dashboard-section">
-        <h2>Request a Loan</h2>
-        <div className="form-card">
-          <div className="form-group">
-            <label>Loan Amount (MUSD)</label>
-            <input
-              type="number"
-              value={loanAmount}
-              onChange={(e) => setLoanAmount(e.target.value)}
-              placeholder="1000"
-            />
-          </div>
-          <div className="form-group">
-            <label>Duration (Days)</label>
-            <select value={loanDuration} onChange={(e) => setLoanDuration(e.target.value)}>
-              <option value="30">30 days</option>
-              <option value="60">60 days</option>
-              <option value="90">90 days</option>
-              <option value="180">180 days</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Purpose</label>
-            <textarea
-              value={loanPurpose}
-              onChange={(e) => setLoanPurpose(e.target.value)}
-              placeholder="e.g., Tuition fees, textbooks, laptop..."
-              rows="3"
-            />
-          </div>
-          <button
-            className="btn btn-primary"
-            onClick={handleRequestLoan}
-            disabled={!loanAmount || !loanPurpose || !studentData?.[0]}
-          >
-            Request Loan
-          </button>
-          {!studentData?.[0] && (
-            <p className="warning-text">⚠️ You need to be verified first to request loans.</p>
-          )}
-        </div>
-      </div>
-
-      {/* Active Loans */}
-      <div className="dashboard-section">
-        <h2>Your Loans</h2>
-        <div className="loans-list">
-          {studentLoans && studentLoans.length > 0 ? (
-            <div className="table-container">
-              <table className="loans-table">
-                <thead>
-                  <tr>
-                    <th>Loan ID</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {studentLoans.map((loanId) => (
-                    <tr key={loanId.toString()}>
-                      <td>#{loanId.toString()}</td>
-                      <td>Loading...</td>
-                      <td>Loading...</td>
-                      <td>
-                        <button className="btn btn-sm">View Details</button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <p className="empty-state">No loans yet. Request your first loan above!</p>
-          )}
-        </div>
-      </div>
-
-      {/* Achievements */}
-      <div className="dashboard-section">
-        <h2>🎖️ Your Achievements</h2>
-        <div className="achievements-grid">
-          {achievements && achievements.length > 0 ? (
-            achievements.map((achievementId) => (
-              <div key={achievementId.toString()} className="achievement-card">
-                <div className="achievement-icon">🏆</div>
-                <div className="achievement-title">Achievement #{achievementId.toString()}</div>
+        {/* Student Status */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Status</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="text-sm text-gray-600 mb-2">Verification Status</div>
+              <div className="text-xl font-bold text-gray-800">
+                {studentData?.[0] ? '✅ Verified' : '❌ Not Verified'}
               </div>
-            ))
-          ) : (
-            <p className="empty-state">No achievements yet. Complete your first loan to earn NFTs!</p>
-          )}
+            </div>
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="text-sm text-gray-600 mb-2">MUSD Balance</div>
+              <div className="text-xl font-bold text-purple-600">
+                {musdBalance ? formatEther(musdBalance) : '0'} MUSD
+              </div>
+            </div>
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="text-sm text-gray-600 mb-2">Reputation Score</div>
+              <div className="text-xl font-bold text-gray-800">
+                {studentData?.[3]?.toString() || '0'} / 200
+              </div>
+            </div>
+            <div className="bg-white rounded-xl shadow-lg p-6">
+              <div className="text-sm text-gray-600 mb-2">Total Borrowed</div>
+              <div className="text-xl font-bold text-gray-800">
+                {studentData?.[1] ? formatEther(studentData[1]) : '0'} MUSD
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Collateral Deposit */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Deposit Collateral & Mint MUSD</h2>
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <p className="text-gray-600 mb-6">
+              Deposit ETH as collateral (simulating Bitcoin via Mezo) to mint MUSD stablecoins.
+            </p>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Collateral Amount (ETH)
+              </label>
+              <input
+                type="number"
+                step="0.01"
+                value={collateralAmount}
+                onChange={(e) => setCollateralAmount(e.target.value)}
+                placeholder="0.1"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              />
+            </div>
+            <button
+              onClick={handleDepositCollateral}
+              disabled={!collateralAmount || parseFloat(collateralAmount) <= 0}
+              className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+            >
+              Deposit Collateral & Mint MUSD
+            </button>
+          </div>
+        </div>
+
+        {/* Loan Request */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Request a Loan</h2>
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Loan Amount (MUSD)
+              </label>
+              <input
+                type="number"
+                value={loanAmount}
+                onChange={(e) => setLoanAmount(e.target.value)}
+                placeholder="1000"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Duration (Days)
+              </label>
+              <select
+                value={loanDuration}
+                onChange={(e) => setLoanDuration(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              >
+                <option value="30">30 days</option>
+                <option value="60">60 days</option>
+                <option value="90">90 days</option>
+                <option value="180">180 days</option>
+              </select>
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Purpose
+              </label>
+              <textarea
+                value={loanPurpose}
+                onChange={(e) => setLoanPurpose(e.target.value)}
+                placeholder="e.g., Tuition fees, textbooks, laptop..."
+                rows="3"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+              />
+            </div>
+            <button
+              onClick={handleRequestLoan}
+              disabled={!loanAmount || !loanPurpose || !studentData?.[0]}
+              className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+            >
+              Request Loan
+            </button>
+            {!studentData?.[0] && (
+              <p className="mt-4 text-amber-600 font-medium">⚠️ You need to be verified first to request loans.</p>
+            )}
+          </div>
+        </div>
+
+        {/* Active Loans */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Loans</h2>
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            {studentLoans && studentLoans.length > 0 ? (
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-gray-200">
+                      <th className="text-left py-3 px-4 font-semibold text-gray-700">Loan ID</th>
+                      <th className="text-left py-3 px-4 font-semibold text-gray-700">Amount</th>
+                      <th className="text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                      <th className="text-left py-3 px-4 font-semibold text-gray-700">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {studentLoans.map((loanId) => (
+                      <tr key={loanId.toString()} className="border-b border-gray-100 hover:bg-gray-50">
+                        <td className="py-3 px-4">#{loanId.toString()}</td>
+                        <td className="py-3 px-4">Loading...</td>
+                        <td className="py-3 px-4">Loading...</td>
+                        <td className="py-3 px-4">
+                          <button className="px-4 py-2 bg-purple-600 text-white text-sm rounded-lg hover:bg-purple-700 transition-colors">
+                            View Details
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p className="text-gray-600 text-center py-8">No loans yet. Request your first loan above!</p>
+            )}
+          </div>
+        </div>
+
+        {/* Achievements */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">🎖️ Your Achievements</h2>
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            {achievements && achievements.length > 0 ? (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {achievements.map((achievementId) => (
+                  <div key={achievementId.toString()} className="text-center p-4 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg">
+                    <div className="text-4xl mb-2">🏆</div>
+                    <div className="text-sm font-medium text-gray-700">Achievement #{achievementId.toString()}</div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-600 text-center py-8">No achievements yet. Complete your first loan to earn NFTs!</p>
+            )}
+          </div>
         </div>
       </div>
     </div>

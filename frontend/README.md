@@ -1,6 +1,6 @@
-# StudentMezo Frontend
+# PeerPledge Frontend
 
-React-based frontend for the StudentMezo DApp.
+React-based frontend for the PeerPledge DApp.
 
 ## Features
 

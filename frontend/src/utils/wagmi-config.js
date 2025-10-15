@@ -2,8 +2,8 @@ import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { hardhat, mainnet, sepolia } from 'wagmi/chains';
 
 export const config = getDefaultConfig({
-  appName: 'PeerPledge DApp',
-  projectId: 'YOUR_PROJECT_ID', // Get from WalletConnect Cloud
+  appName: 'PeerPledge',
+  projectId: 'da82adaa55c7e1ef57617ea0bdf7c8bf', // Get from WalletConnect Cloud
   chains: [hardhat, sepolia, mainnet],
   ssr: false,
 });

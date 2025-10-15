@@ -12,7 +12,7 @@ function HomePage() {
       <section className="w-full mx-auto px-4 sm:px-6 h-screen lg:px-8 top-20 py-16 md:py-24 bg-gradient-to-b from-gray-50 via-gray-50 to-indigo-900">
         <div className="text-center mx-auto max-w-6xl bg-gradient-to-r from-indigo-800 via-black to-indigo-800 rounded-3xl p-8 md:p-16 text-white shadow-2xl">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            PeerPledge DApp
+            PeerPledge
           </h1>
           <p className="text-xl md:text-2xl mb-4 opacity-95">
             Decentralized Microloans for Education Powered by Bitcoin & Mezo

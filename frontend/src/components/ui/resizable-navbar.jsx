@@ -205,7 +205,7 @@ export const NavbarLogo = ({ visible }) => {
         visible ? "text-white" : "text-black"
       )}>
       <img
-        src="https://assets.aceternity.com/logo-dark.png"
+        src="https://bnjw1stw34.ufs.sh/f/BTRdXypJe8COrzXz7u8Thso1MFg2VIqxfjtaHuJKRX6wr0UG"
         alt="logo"
         width={30}
         height={30} />

@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage';
 import StudentDashboard from './pages/StudentDashboard';
 import LenderDashboard from './pages/LenderDashboard';
 import Navbar from './components/Navbar';
+import FooterMerlin from "./components/mvpblocks/footer-merlin";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/lender" element={<LenderDashboard />} />
         </Routes>
       </main>
+         <FooterMerlin />
     </div>
   );
 }

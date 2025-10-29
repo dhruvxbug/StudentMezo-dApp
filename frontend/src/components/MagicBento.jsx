@@ -546,7 +546,7 @@ const MagicBento = ({
             position: absolute;
             inset: 0;
             padding: 6px;
-            background: radial-gradient(var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+            background: radial-gradient(circle var(--glow-radius) at var(--glow-x) var(--glow-y),
                 rgba(${glowColor}, calc(var(--glow-intensity) * 0.8)) 0%,
                 rgba(${glowColor}, calc(var(--glow-intensity) * 0.4)) 30%,
                 transparent 60%);

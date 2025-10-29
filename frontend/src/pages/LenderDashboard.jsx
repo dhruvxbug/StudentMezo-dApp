@@ -56,53 +56,53 @@ function LenderDashboard() {
 
   if (!isConnected) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center max-w-md">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Connect Your Wallet</h2>
-          <p className="text-gray-600">Please connect your wallet to access the lender dashboard.</p>
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 flex items-center justify-center p-4">
+        <div className="bg-gradient-to-r from-indigo-800 via-black to-indigo-800 rounded-2xl shadow-xl p-8 md:p-12 text-center max-w-md">
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Connect Your Wallet</h2>
+          <p className="text-gray-200">Please connect your wallet to access the lender dashboard.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-8 px-4">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">Lender Dashboard</h1>
+        <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-700 to-black bg-clip-text text-transparent mb-8">Lender Dashboard</h1>
 
         {/* Lender Stats */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Portfolio</h2>
+          <h2 className="text-2xl font-bold text-black mb-4">Your Portfolio</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6">
               <div className="text-sm text-gray-600 mb-2">MUSD Balance</div>
-              <div className="text-xl font-bold text-purple-600">
+              <div className="text-xl font-bold text-indigo-700">
                 {musdBalance ? formatEther(musdBalance) : '0'} MUSD
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6">
               <div className="text-sm text-gray-600 mb-2">Total Contributed</div>
-              <div className="text-xl font-bold text-gray-800">
+              <div className="text-xl font-bold text-black">
                 {lenderStats?.[0] ? formatEther(lenderStats[0]) : '0'} MUSD
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6">
               <div className="text-sm text-gray-600 mb-2">Total Earned</div>
               <div className="text-xl font-bold text-green-600">
                 {lenderStats?.[1] ? formatEther(lenderStats[1]) : '0'} MUSD
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6">
               <div className="text-sm text-gray-600 mb-2">Est. APY</div>
-              <div className="text-xl font-bold text-gray-800">8.5%</div>
+              <div className="text-xl font-bold text-black">8.5%</div>
             </div>
           </div>
         </div>
 
         {/* Contribution Form */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Contribute to Lending Pool</h2>
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <h2 className="text-2xl font-bold text-black mb-4">Contribute to Lending Pool</h2>
+          <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6">
             <p className="text-gray-600 mb-6">
               Pool your MUSD to fund student loans and earn yield from interest payments.
             </p>
@@ -115,7 +115,7 @@ function LenderDashboard() {
                 value={contributionAmount}
                 onChange={(e) => setContributionAmount(e.target.value)}
                 placeholder="1000"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-700 focus:border-transparent"
               />
               <div className="text-sm text-gray-600 mt-2">
                 Available: {musdBalance ? formatEther(musdBalance) : '0'} MUSD
@@ -124,7 +124,7 @@ function LenderDashboard() {
             <button
               onClick={handleContributeToPool}
               disabled={!contributionAmount || parseFloat(contributionAmount) <= 0}
-              className="w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-lg hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              className="w-full px-6 py-3 bg-gradient-to-r from-indigo-800 via-black to-indigo-800 text-white font-medium rounded-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               Contribute to Pool
             </button>
@@ -133,55 +133,55 @@ function LenderDashboard() {
 
         {/* Pool Overview */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Lending Pool Overview</h2>
+          <h2 className="text-2xl font-bold text-black mb-4">Lending Pool Overview</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6 text-center">
               <div className="text-sm text-gray-600 mb-2">Total Pool Size</div>
-              <div className="text-xl font-bold text-gray-800">0 MUSD</div>
+              <div className="text-xl font-bold text-black">0 MUSD</div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6 text-center">
               <div className="text-sm text-gray-600 mb-2">Total Lent Out</div>
-              <div className="text-xl font-bold text-gray-800">0 MUSD</div>
+              <div className="text-xl font-bold text-black">0 MUSD</div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6 text-center">
               <div className="text-sm text-gray-600 mb-2">Available to Lend</div>
-              <div className="text-xl font-bold text-gray-800">0 MUSD</div>
+              <div className="text-xl font-bold text-black">0 MUSD</div>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6 text-center">
               <div className="text-sm text-gray-600 mb-2">Active Loans</div>
-              <div className="text-xl font-bold text-gray-800">0</div>
+              <div className="text-xl font-bold text-black">0</div>
             </div>
           </div>
         </div>
 
         {/* How It Works */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">How Lending Works</h2>
+          <h2 className="text-2xl font-bold text-black mb-4">How Lending Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6 text-center">
               <div className="text-4xl mb-4">💰</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Earn Yield</h3>
+              <h3 className="text-lg font-semibold text-black mb-2">Earn Yield</h3>
               <p className="text-sm text-gray-600">
                 Contribute MUSD to the lending pool and earn interest from student loan repayments.
               </p>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6 text-center">
               <div className="text-4xl mb-4">🔒</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Collateralized</h3>
+              <h3 className="text-lg font-semibold text-black mb-2">Collateralized</h3>
               <p className="text-sm text-gray-600">
                 All loans are over-collateralized at 150% to protect lender funds.
               </p>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6 text-center">
               <div className="text-4xl mb-4">📊</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Transparent</h3>
+              <h3 className="text-lg font-semibold text-black mb-2">Transparent</h3>
               <p className="text-sm text-gray-600">
                 Track all loans, repayments, and earnings in real-time on the blockchain.
               </p>
             </div>
-            <div className="bg-white rounded-xl shadow-lg p-6 text-center">
+            <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6 text-center">
               <div className="text-4xl mb-4">🎯</div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Impact</h3>
+              <h3 className="text-lg font-semibold text-black mb-2">Impact</h3>
               <p className="text-sm text-gray-600">
                 Help students access education while earning competitive returns.
               </p>
@@ -191,8 +191,8 @@ function LenderDashboard() {
 
         {/* Active Loans Being Funded */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Active Loans</h2>
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <h2 className="text-2xl font-bold text-black mb-4">Active Loans</h2>
+          <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6">
             <p className="text-gray-600 text-center py-8">
               No active loans yet. Loans funded by the pool will appear here.
             </p>

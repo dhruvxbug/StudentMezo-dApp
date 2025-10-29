@@ -93,16 +93,26 @@ contract StudentLoanPlatform is Ownable, ReentrancyGuard {
         verifiers[verifier] = false;
     }
     
-    // Student verification
+    // Student verification (optional - no longer required for loans)
     function verifyStudent(address student) external onlyVerifier {
         students[student].isVerified = true;
         students[student].reputationScore = 100; // Starting score
         emit StudentVerified(student);
     }
     
+    // Initialize student if first time user
+    function _initializeStudent(address student) internal {
+        if (students[student].reputationScore == 0) {
+            students[student].reputationScore = 100; // Starting score for new users
+        }
+    }
+    
     // Collateral and MUSD minting (simulating Mezo Bitcoin deposits)
-    function depositCollateralAndMintMUSD() external payable onlyVerifiedStudent nonReentrant {
+    function depositCollateralAndMintMUSD() external payable nonReentrant {
         require(msg.value > 0, "Must deposit collateral");
+        
+        // Initialize student if first time
+        _initializeStudent(msg.sender);
         
         // Calculate MUSD to mint based on collateral (simplified)
         uint256 musdAmount = msg.value; // 1:1 for demo, real implementation would use oracle
@@ -118,9 +128,12 @@ contract StudentLoanPlatform is Ownable, ReentrancyGuard {
         uint256 amount,
         uint256 duration,
         string memory purpose
-    ) external onlyVerifiedStudent returns (uint256) {
+    ) external returns (uint256) {
         require(amount > 0, "Loan amount must be greater than 0");
         require(duration > 0, "Duration must be greater than 0");
+        
+        // Initialize student if first time
+        _initializeStudent(msg.sender);
         
         loanIdCounter++;
         uint256 loanId = loanIdCounter;

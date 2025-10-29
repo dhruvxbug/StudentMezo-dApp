@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { FaqSection } from "../components/mvpblocks/faq-1"
 import { Page } from "../components/mvpblocks/sparkles-logo"
-import FooterMerlin from "../components/mvpblocks/footer-merlin"
 import MagicBento from "../components/MagicBento"
 
 function HomePage() {
@@ -74,7 +73,7 @@ function HomePage() {
       <FaqSection />
     </section>
 
-    <FooterMerlin />
+ 
    
     </div>
   );

@@ -1,11 +1,23 @@
-// Contract addresses (update after deployment)
+// Contract addresses (updated from local deployment with Mezo Bitcoin integration)
 export const CONTRACT_ADDRESSES = {
-  MUSD: '0x0000000000000000000000000000000000000000',
-  StudentLoanNFT: '0x0000000000000000000000000000000000000000',
-  StudentLoanPlatform: '0x0000000000000000000000000000000000000000',
+  mBTC: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+  MezoBridge: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+  MUSD: '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
+  StudentLoanNFT: '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9',
+  StudentLoanPlatform: '0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9',
 };
 
 // Contract ABIs (simplified - import full ABIs from artifacts)
+export const MBTC_ABI = [
+  "function balanceOf(address owner) view returns (uint256)",
+  "function approve(address spender, uint256 amount) returns (bool)",
+  "function transfer(address to, uint256 amount) returns (bool)",
+  "function decimals() view returns (uint8)",
+  "function faucet()",
+  "event Transfer(address indexed from, address indexed to, uint256 value)",
+  "event Approval(address indexed owner, address indexed spender, uint256 value)",
+];
+
 export const MUSD_ABI = [
   "function balanceOf(address owner) view returns (uint256)",
   "function approve(address spender, uint256 amount) returns (bool)",
@@ -14,7 +26,7 @@ export const MUSD_ABI = [
 
 export const PLATFORM_ABI = [
   "function students(address) view returns (bool isVerified, uint256 totalBorrowed, uint256 totalRepaid, uint256 reputationScore)",
-  "function depositCollateralAndMintMUSD() payable",
+  "function depositCollateralAndMintMUSD(uint256 mBtcAmount)",
   "function requestLoan(uint256 amount, uint256 duration, string purpose) returns (uint256)",
   "function contributeToPool(uint256 amount)",
   "function repayLoan(uint256 loanId, uint256 amount)",

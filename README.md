@@ -24,13 +24,14 @@ A decentralized student microloan platform powered by Bitcoin (via Mezo) and sma
 - 🎮 **Gamification**: NFT rewards and leaderboards
 - 📊 **Interest Rates**: Dynamic rates based on reputation scores
 
-## Tech Stack 🛠️
+### Tech Stack 🛠️
 
 ### Frontend
 - **React** - UI framework
 - **Vite** - Build tool
-- **Wagmi** - Ethereum React hooks
+- **Wagmi** - Web3 React hooks
 - **RainbowKit** - Wallet connection
+- **Mezo SDK** - Bitcoin integration layer
 - **React Router** - Navigation
 - **Recharts** - Data visualization
 
@@ -38,12 +39,17 @@ A decentralized student microloan platform powered by Bitcoin (via Mezo) and sma
 - **Solidity 0.8.20** - Smart contract language
 - **Hardhat** - Development environment
 - **OpenZeppelin** - Security-audited contract libraries
+- **Mezo Protocol** - Bitcoin to EVM bridge
 - **Ethers.js** - Blockchain interaction
 
 ### Contracts
-1. **MUSD.sol** - ERC20 stablecoin for loans
-2. **StudentLoanPlatform.sol** - Main lending platform
-3. **StudentLoanNFT.sol** - Achievement NFTs (ERC721)
+1. **WrappedBTC.sol (mBTC)** - Mezo Bitcoin token (ERC20, 8 decimals)
+2. **MezoBridge.sol** - Bitcoin L1 to EVM bridge interface
+3. **MUSD.sol** - ERC20 stablecoin for loans
+4. **StudentLoanPlatform.sol** - Main lending platform with Bitcoin collateral
+5. **StudentLoanNFT.sol** - Achievement NFTs (ERC721)
+
+📖 **[Read the Mezo Bitcoin Integration Guide](./MEZO_BITCOIN_INTEGRATION.md)** for detailed documentation on how real Bitcoin is used as collateral.
 
 ## Project Structure 📁
 

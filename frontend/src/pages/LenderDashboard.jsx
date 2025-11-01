@@ -167,9 +167,9 @@ function LenderDashboard() {
             </div>
             <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6 text-center">
               <div className="text-4xl mb-4">🔒</div>
-              <h3 className="text-lg font-semibold text-black mb-2">Collateralized</h3>
+              <h3 className="text-lg font-semibold text-black mb-2">Bitcoin-Backed</h3>
               <p className="text-sm text-gray-600">
-                All loans are over-collateralized at 150% to protect lender funds.
+                All loans are over-collateralized at 150% with Bitcoin via Mezo to protect lender funds.
               </p>
             </div>
             <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6 text-center">

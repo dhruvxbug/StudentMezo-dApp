@@ -126,21 +126,21 @@ function StudentDashboard() {
 
         {/* Collateral Deposit */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-black mb-4">Deposit Collateral & Mint MUSD</h2>
+          <h2 className="text-2xl font-bold text-black mb-4">Deposit Bitcoin & Mint MUSD</h2>
           <div className="bg-gradient-to-br from-gray-50 to-white border border-gray-200 rounded-xl shadow-lg p-6">
             <p className="text-gray-600 mb-6">
-              Deposit ETH as collateral (simulating Bitcoin via Mezo) to mint MUSD stablecoins.
+              Deposit Bitcoin as collateral via Mezo to mint MUSD stablecoins for your education loans.
             </p>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Collateral Amount (ETH)
+                Bitcoin Amount (BTC)
               </label>
               <input
                 type="number"
-                step="0.01"
+                step="0.001"
                 value={collateralAmount}
                 onChange={(e) => setCollateralAmount(e.target.value)}
-                placeholder="0.1"
+                placeholder="0.01"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-700 focus:border-transparent"
               />
             </div>
@@ -149,7 +149,7 @@ function StudentDashboard() {
               disabled={!collateralAmount || parseFloat(collateralAmount) <= 0}
               className="w-full px-6 py-3 bg-gradient-to-r from-indigo-800 via-black to-indigo-800 text-white font-medium rounded-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
-              Deposit Collateral & Mint MUSD
+              Deposit Bitcoin & Mint MUSD
             </button>
           </div>
         </div>

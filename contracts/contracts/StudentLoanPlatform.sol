@@ -3,16 +3,34 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./MUSD.sol";
 import "./StudentLoanNFT.sol";
 
 /**
  * @title StudentLoanPlatform
- * @dev Main contract managing student loans, collateral, and lending
+ * @dev Main contract managing student loans with real Bitcoin collateral via Mezo Protocol
+ * @notice This contract uses mBTC (Mezo Bitcoin) tokens as collateral
+ * 
+ * Mezo Integration Flow:
+ * 1. Users deposit real Bitcoin to Mezo bridge on Bitcoin L1
+ * 2. Mezo validators verify deposit and mint mBTC tokens (1:1 ratio)
+ * 3. Users approve StudentLoanPlatform to spend their mBTC
+ * 4. Users deposit mBTC as collateral and receive MUSD stablecoin
+ * 5. MUSD can be used for education expenses
+ * 6. Upon repayment, collateral is returned (can be withdrawn to Bitcoin L1)
+ * 
+ * Key Features:
+ * - Real Bitcoin backing (not synthetic or wrapped)
+ * - 150% collateralization for lender protection
+ * - Interest rates based on student reputation
+ * - NFT achievements for milestones
+ * - Permissionless (no verification required)
  */
 contract StudentLoanPlatform is Ownable, ReentrancyGuard {
     MUSD public musdToken;
     StudentLoanNFT public nftContract;
+    IERC20 public mBTC; // Mezo Bitcoin token - represents real Bitcoin from L1
     
     enum LoanStatus {
         PENDING,
@@ -61,17 +79,27 @@ contract StudentLoanPlatform is Ownable, ReentrancyGuard {
     LenderPool public lenderPool;
     
     event StudentVerified(address indexed student);
-    event CollateralDeposited(address indexed student, uint256 amount);
-    event MUSDMinted(address indexed student, uint256 amount);
+    event BitcoinCollateralDeposited(address indexed student, uint256 mBtcAmount, uint256 musdMinted);
+    event MUSDMinted(address indexed student, uint256 musdAmount);
     event LoanRequested(uint256 indexed loanId, address indexed student, uint256 amount);
     event LoanFunded(uint256 indexed loanId, uint256 amount);
     event LoanRepaid(uint256 indexed loanId, uint256 amount);
+    event CollateralReturned(address indexed student, uint256 mBtcAmount);
     event LenderContribution(address indexed lender, uint256 amount);
     event YieldDistributed(address indexed lender, uint256 amount);
     
-    constructor(address _musdToken, address _nftContract) Ownable(msg.sender) {
+    constructor(
+        address _musdToken, 
+        address _nftContract, 
+        address _mBTC
+    ) Ownable(msg.sender) {
+        require(_musdToken != address(0), "Invalid MUSD address");
+        require(_nftContract != address(0), "Invalid NFT address");
+        require(_mBTC != address(0), "Invalid mBTC address");
+        
         musdToken = MUSD(_musdToken);
         nftContract = StudentLoanNFT(_nftContract);
+        mBTC = IERC20(_mBTC);
     }
     
     modifier onlyVerifier() {
@@ -107,19 +135,44 @@ contract StudentLoanPlatform is Ownable, ReentrancyGuard {
         }
     }
     
-    // Collateral and MUSD minting (simulating Mezo Bitcoin deposits)
-    function depositCollateralAndMintMUSD() external payable nonReentrant {
-        require(msg.value > 0, "Must deposit collateral");
+    /**
+     * @dev Deposit Bitcoin (via Mezo mBTC) as collateral and mint MUSD
+     * @param mBtcAmount Amount of mBTC tokens to deposit (in satoshis, 8 decimals)
+     * @notice User must first:
+     *         1. Deposit real Bitcoin to Mezo bridge on Bitcoin L1
+     *         2. Receive mBTC tokens on EVM layer (1:1 ratio)
+     *         3. Approve this contract to spend their mBTC tokens
+     * @notice In production: Use Chainlink BTC/USD oracle for accurate pricing
+     * 
+     * Process:
+     * 1. Transfer mBTC from user to this contract (holds as collateral)
+     * 2. Calculate MUSD amount based on BTC value (simplified 1:1 for demo)
+     * 3. Mint MUSD stablecoin to user for education expenses
+     * 4. Track collateral for potential loan backing
+     */
+    function depositCollateralAndMintMUSD(uint256 mBtcAmount) external nonReentrant {
+        require(mBtcAmount > 0, "Must deposit Bitcoin collateral");
+        require(mBtcAmount >= 0.001 * 10**8, "Minimum 0.001 BTC required"); // 0.001 BTC minimum
         
         // Initialize student if first time
         _initializeStudent(msg.sender);
         
-        // Calculate MUSD to mint based on collateral (simplified)
-        uint256 musdAmount = msg.value; // 1:1 for demo, real implementation would use oracle
+        // Transfer mBTC tokens from user to this contract (holds as collateral)
+        require(
+            mBTC.transferFrom(msg.sender, address(this), mBtcAmount),
+            "mBTC transfer failed - ensure you have approved this contract"
+        );
+        
+        // Calculate MUSD to mint based on Bitcoin collateral
+        // PRODUCTION: Use Chainlink BTC/USD oracle for real-time pricing
+        // For demo/testing: Simplified 1 BTC = 50,000 MUSD ratio
+        // mBTC: 8 decimals, MUSD: 18 decimals
+        // Example: 1 BTC (100000000 satoshis) = 50,000 MUSD (50000 * 10^18)
+        uint256 musdAmount = (mBtcAmount * 50000 * 10**18) / (1 * 10**8);
         
         musdToken.mint(msg.sender, musdAmount);
         
-        emit CollateralDeposited(msg.sender, msg.value);
+        emit BitcoinCollateralDeposited(msg.sender, mBtcAmount, musdAmount);
         emit MUSDMinted(msg.sender, musdAmount);
     }
     

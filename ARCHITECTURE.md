@@ -26,7 +26,7 @@
                               ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                      BLOCKCHAIN LAYER                           │
-│                   (Ethereum / Testnet)                         │
+│                  (Mezo Network / EVM Layer)                    │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
 │  ┌─────────────────┐  ┌──────────────────┐  ┌──────────────┐ │
@@ -35,7 +35,7 @@
 │  │                 │  │                  │  │              │ │
 │  │ • Mint          │  │ • Achievements   │  │ • Loans      │ │
 │  │ • Burn          │  │ • Metadata       │  │ • Pool       │ │
-│  │ • Transfer      │  │ • User NFTs      │  │ • Verify     │ │
+│  │ • Transfer      │  │ • User NFTs      │  │ • BTC Bridge │ │
 │  └─────────────────┘  └──────────────────┘  └──────────────┘ │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
@@ -76,11 +76,12 @@
 │ verifyStudent()      │      │   (Admin)      │
 └──────┬───────────────┘      └────────────────┘
        │
-       │ 3. Deposit Collateral & Mint MUSD
+       │ 3. Deposit Bitcoin & Mint MUSD
        ▼
 ┌──────────────────────────────────────┐
 │ depositCollateralAndMintMUSD()       │
-│   • Receive ETH                      │
+│   • Receive BTC via Mezo bridge      │
+│   • Lock Bitcoin collateral          │
 │   • Call MUSD.mint()                 │
 │   • Emit Events                      │
 └──────┬───────────────────────────────┘

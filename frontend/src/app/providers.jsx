@@ -22,7 +22,7 @@ const config = createConfig({
   connectors: [
     injected({ target: "metaMask" }),
     walletConnect({
-      projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "033eaa805e753c515d064bced64b1d6d",
+      projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "da82adaa55c7e1ef57617ea0bdf7c8bf",
       showQrModal: true,
     }),
     coinbaseWallet({ appName: "PeerPledge" }),

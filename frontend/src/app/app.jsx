@@ -8,7 +8,6 @@ import FooterMerlin from "../components/mvpblocks/footer-merlin";
 function App() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
       <main className='pt-12'>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -16,7 +15,6 @@ function App() {
           <Route path="/lender" element={<LenderDashboard />} />
         </Routes>
       </main>
-         <FooterMerlin />
     </div>
   );
 }

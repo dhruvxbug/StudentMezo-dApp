@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import StudentDashboard from './pages/StudentDashboard';
-import LenderDashboard from './pages/LenderDashboard';
-import Navbar from './components/Navbar';
-import FooterMerlin from "./components/mvpblocks/footer-merlin";
+import HomePage from '../views/HomePage';
+import StudentDashboard from '../views/StudentDashboard';
+import LenderDashboard from '../views/LenderDashboard';
+import Navbar from '../components/Navbar';
+import FooterMerlin from "../components/mvpblocks/footer-merlin";
 
 function App() {
   return (

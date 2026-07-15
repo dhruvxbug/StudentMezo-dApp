@@ -6,7 +6,7 @@ PeerPledge enables students worldwide to access education financing using their 
 
 ##  Overview
 
-StudentMezo bridges traditional education financing with Bitcoin's financial sovereignty. Students deposit real Bitcoin (via Mezo bridge) as collateral to mint MUSD stablecoins, which they can use for tuition, books, and living expenses. The platform automatically manages loans, interest, and collateral—no banks, no paperwork, no discrimination.
+PeerPledge bridges traditional education financing with Bitcoin's financial sovereignty. Students deposit real Bitcoin (via Mezo bridge) as collateral to mint MUSD stablecoins, which they can use for tuition, books, and living expenses. The platform automatically manages loans, interest, and collateral—no banks, no paperwork, no discrimination.
 
 ## Features 
 

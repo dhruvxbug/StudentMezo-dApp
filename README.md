@@ -1,36 +1,36 @@
-# StudentMezo DApp 🎓₿
+# PeerPledge
 
 > **A decentralized student microloan platform powered by real Bitcoin collateral via Mezo Protocol**
 
-StudentMezo enables students worldwide to access education financing using their Bitcoin holdings as collateral. Lenders earn yield by funding these Bitcoin-backed loans, creating a trustless, transparent, and inclusive financial system for education.
+PeerPledge enables students worldwide to access education financing using their Bitcoin holdings as collateral. Lenders earn yield by funding these Bitcoin-backed loans, creating a trustless, transparent, and inclusive financial system for education.
 
-## 🌟 Overview
+##  Overview
 
 StudentMezo bridges traditional education financing with Bitcoin's financial sovereignty. Students deposit real Bitcoin (via Mezo bridge) as collateral to mint MUSD stablecoins, which they can use for tuition, books, and living expenses. The platform automatically manages loans, interest, and collateral—no banks, no paperwork, no discrimination.
 
-## Features ✨
+## Features 
 
 ### For Students
-- 🔐 **Secure Wallet Connect**: Connect via WalletConnect/RainbowKit
-- ₿ **Bitcoin Collateral**: Deposit Bitcoin via Mezo to mint MUSD
-- 📚 **Microloan Requests**: Request education loans with transparent terms
-- 🎖️ **NFT Achievements**: Earn achievement NFTs for milestones
-- 📊 **Reputation System**: Build credit score through timely repayments
-- 💳 **Dashboard**: Track loans, repayments, and achievements
+-  **Secure Wallet Connect**: Connect via WalletConnect/RainbowKit
+-  **Bitcoin Collateral**: Deposit Bitcoin via Mezo to mint MUSD
+-  **Microloan Requests**: Request education loans with transparent terms
+-  **NFT Achievements**: Earn achievement NFTs for milestones
+-  **Reputation System**: Build credit score through timely repayments
+-  **Dashboard**: Track loans, repayments, and achievements
 
 ### For Lenders
-- 💰 **Yield Earning**: Pool MUSD and earn interest from repayments
-- 🔒 **Collateralized Loans**: All loans are 150% over-collateralized
-- 📈 **Transparent Tracking**: Monitor pool performance in real-time
-- 🎯 **Social Impact**: Help students access education
+-  **Yield Earning**: Pool MUSD and earn interest from repayments
+-  **Collateralized Loans**: All loans are 150% over-collateralized
+-  **Transparent Tracking**: Monitor pool performance in real-time
+-  **Social Impact**: Help students access education
 
 ### Smart Contract Features
-- ⚡ **Automated Lending**: Smart contracts manage the entire loan lifecycle
-- 🛡️ **Secure Collateral**: Bitcoin collateral locked on-chain
-- 🎮 **Gamification**: NFT rewards and leaderboards
-- 📊 **Interest Rates**: Dynamic rates based on reputation scores
+-  **Automated Lending**: Smart contracts manage the entire loan lifecycle
+-  **Secure Collateral**: Bitcoin collateral locked on-chain
+-  **Gamification**: NFT rewards and leaderboards
+-  **Interest Rates**: Dynamic rates based on reputation scores
 
-### Tech Stack 🛠️
+### Tech Stack 
 
 ### Frontend
 - **React** - UI framework
@@ -79,7 +79,7 @@ StudentMezo-dApp/
 └── package.json             # Workspace config
 ```
 
-## 🔄 How It Works
+##  How It Works
 
 ### Bitcoin Collateral Flow
 
@@ -143,7 +143,7 @@ StudentMezo-dApp/
 └─────────────────────────────────────────────────────┘
 ```
 
-## 🚀 Quick Start (5 Minutes)
+##  Quick Start (5 Minutes)
 
 ### Prerequisites
 - Node.js 18+ and npm
